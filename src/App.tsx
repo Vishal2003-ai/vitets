@@ -1,28 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import './App.css'
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Cources from './pages/Cources'
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/pages/Home';
+import About from './components/pages/About';
+import Cources from './components/pages/Cources';
+import Contact from './components/pages/Contact';
+
 
 export default function App() {
   return (
-    <div>
+    <Router>
       <Header />
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cources" element={<Cources />} />
-          </Routes>
-        </Router>
-      </div>
+      <Routes>
+        <Route path="/" element={<div>Home Page</div>} />
+        <Route path="/about" element={<div>About Page</div>} />
+        <Route path="/contact" element={<div>Contact Page</div>} />
+        <Route path="/course" element={<div>Course Page</div>} />
+      </Routes>
       <Footer />
-    </div>
+    </Router>
   )
 }
