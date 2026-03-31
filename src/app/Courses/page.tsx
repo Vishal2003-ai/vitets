@@ -1,557 +1,192 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import {
-  Clock,
-  Users,
-  Award,
+import Link from "next/link";
+import { 
+  Clock, 
+  GraduationCap, 
+  ArrowRight, 
+  CheckCircle2, 
   Star,
   BookOpen,
-  Code,
-  Database,
-  Globe,
-  Smartphone,
-  Palette,
-  TrendingUp,
-  Shield,
-  Zap,
+  Award
 } from "lucide-react";
-import Link from "next/link";
+
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+// Data import (As per your request)
+import { courseDetails } from "@/data/courses";
+
+// Static data for Government Certifications (From your first code)
+const govtCertifications = [
+  {
+    title: "Course on Computer Concepts (CCC)",
+    duration: "3 Months",
+    level: "Beginner",
+    slug: "ccc",
+    description: "Essential digital skills for government exams and basic computer literacy.",
+  },
+  {
+    title: "O Level Computer Course (NIELIT)",
+    duration: "1 Year",
+    level: "Intermediate",
+    slug: "o-level",
+    description: "Professional IT course covering Python, Web Design, and Networking.",
+  },
+  {
+    title: "ADCA",
+    duration: "1 Year",
+    level: "Advanced",
+    slug: "adca",
+    description: "Advanced Diploma covering Tally GST, DTP, and Office Automation.",
+  },
+];
 
 export default function CoursesPage() {
-  const certificationCourses = [
-    {
-      title: "Course on Computer Concepts (CCC)",
-      duration: "3 Months",
-      level: "Beginner",
-      price: "₹3,500",
-      description:
-        "Essential digital skills including computer fundamentals, MS Office, internet usage, and online safety. Perfect for government exam aspirants.",
-      features: [
-        "Computer Fundamentals",
-        "MS Office Suite",
-        "Internet & Email",
-        "Online Safety",
-      ],
-      icon: BookOpen,
-      color: "blue",
-    },
-    {
-      title: "O Level Computer Course (NIELIT)",
-      duration: "1 Year",
-      level: "Intermediate",
-      price: "₹8,500",
-      description:
-        "Professional IT course covering Python programming, database management, web design, and networking. Ideal for software and IT careers.",
-      features: [
-        "Python Programming",
-        "Database Management",
-        "Web Design",
-        "Networking",
-      ],
-      icon: Code,
-      color: "green",
-    },
-    {
-      title: "Advanced Diploma in Computer Applications (ADCA)",
-      duration: "1 Year",
-      level: "Advanced",
-      price: "₹7,500",
-      description:
-        "Comprehensive diploma covering Tally with GST, DTP, web designing, and office automation. Perfect for admin and accounting roles.",
-      features: [
-        "Tally with GST",
-        "Desktop Publishing",
-        "Web Designing",
-        "Office Automation",
-      ],
-      icon: Award,
-      color: "purple",
-    },
-  ];
-
-  const professionalCourses = [
-    {
-      title: "Python Programming Masterclass",
-      duration: "4 Months",
-      level: "Beginner to Advanced",
-      price: "₹5,500",
-      description:
-        "Master Python from basics to advanced concepts including data structures, OOP, Django framework, and automation.",
-      features: [
-        "Python Basics",
-        "Data Structures",
-        "OOP Concepts",
-        "Django Framework",
-        "Automation",
-      ],
-      icon: Code,
-      color: "blue",
-      image: "/python.webp",
-    },
-    {
-      title: "Full-Stack Web Development",
-      duration: "6 Months",
-      level: "Beginner to Advanced",
-      price: "₹12,000",
-      description:
-        "Complete web development course covering HTML, CSS, JavaScript, React, Node.js, and database integration.",
-      features: [
-        "HTML5 & CSS3",
-        "JavaScript ES6+",
-        "React.js",
-        "Node.js",
-        "MongoDB",
-      ],
-      icon: Globe,
-      color: "green",
-      image: "https://images.unsplash.com/photo-1504805572947-34fad45aed93",
-    },
-    {
-      title: "Mobile App Development",
-      duration: "5 Months",
-      level: "Intermediate",
-      price: "₹9,500",
-      description:
-        "Learn to build mobile applications using React Native and Flutter. Create cross-platform apps for iOS and Android.",
-      features: [
-        "React Native",
-        "Flutter",
-        "API Integration",
-        "App Store Deployment",
-        "UI/UX Design",
-      ],
-      icon: Smartphone,
-      color: "purple",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
-    },
-    {
-      title: "Data Science & Analytics",
-      duration: "5 Months",
-      level: "Intermediate",
-      price: "₹10,500",
-      description:
-        "Comprehensive data science course covering Python, statistics, machine learning, and data visualization.",
-      features: [
-        "Python for Data Science",
-        "Statistics",
-        "Machine Learning",
-        "Data Visualization",
-        "SQL",
-      ],
-      icon: Database,
-      color: "orange",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
-    },
-    {
-      title: "UI/UX Design",
-      duration: "4 Months",
-      level: "Beginner",
-      price: "₹6,500",
-      description:
-        "Learn modern design principles, user research, prototyping, and tools like Figma and Adobe XD.",
-      features: [
-        "Design Principles",
-        "User Research",
-        "Prototyping",
-        "Figma",
-        "Adobe XD",
-      ],
-      icon: Palette,
-      color: "pink",
-      image: "https://images.unsplash.com/photo-1558655146-d09347e92766",
-    },
-    {
-      title: "Digital Marketing",
-      duration: "3 Months",
-      level: "Beginner",
-      price: "₹4,500",
-      description:
-        "Master digital marketing strategies including SEO, social media marketing, content creation, and analytics.",
-      features: [
-        "SEO & SEM",
-        "Social Media Marketing",
-        "Content Creation",
-        "Google Analytics",
-        "Email Marketing",
-      ],
-      icon: TrendingUp,
-      color: "red",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    },
-    {
-      title: "Cybersecurity Fundamentals",
-      duration: "4 Months",
-      level: "Intermediate",
-      price: "₹8,500",
-      description:
-        "Learn cybersecurity concepts, ethical hacking, network security, and protection strategies.",
-      features: [
-        "Network Security",
-        "Ethical Hacking",
-        "Penetration Testing",
-        "Security Tools",
-        "Incident Response",
-      ],
-      icon: Shield,
-      color: "gray",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
-    },
-    {
-      title: "AI & Machine Learning",
-      duration: "5 Months",
-      level: "Advanced",
-      price: "₹11,500",
-      description:
-        "Explore artificial intelligence, machine learning algorithms, deep learning, and AI applications.",
-      features: [
-        "Machine Learning",
-        "Deep Learning",
-        "Neural Networks",
-        "AI Tools",
-        "ChatGPT APIs",
-      ],
-      icon: Zap,
-      color: "yellow",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-    },
-  ];
-
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: "bg-blue-100 text-blue-600",
-      green: "bg-green-100 text-green-600",
-      purple: "bg-purple-100 text-purple-600",
-      orange: "bg-orange-100 text-orange-600",
-      pink: "bg-pink-100 text-pink-600",
-      red: "bg-red-100 text-red-600",
-      gray: "bg-gray-100 text-gray-600",
-      yellow: "bg-yellow-100 text-yellow-600",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
-
   return (
-    <main className="bg-gray-50 text-gray-800">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-20 px-6">
-        <div className="max-w-6xl mx-auto text-center">
+    <main className="min-h-screen bg-slate-50/50 pb-20">
+      
+      {/* ===== HEADER SECTION (Merged UI) ===== */}
+      <section className="relative bg-[#1a2e44] text-white py-24 overflow-hidden">
+        {/* Background Decorative Circles */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our <span className="text-blue-600">Courses</span>
+            <Badge className="mb-4 bg-orange-500 hover:bg-orange-600 text-white border-none px-4 py-1">
+              Elevate Your Career
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              Our <span className="text-orange-500">Professional</span> Courses
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Choose from our comprehensive range of computer courses designed
-              to boost your career. From beginner-friendly certifications to
-              advanced professional programs.
+            <p className="text-slate-300 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
+              Career Mantra offers industry-aligned programs to help you master the most in-demand technical skills and get certified.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Certification Courses */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Government Recognized Certifications
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              These courses are recognized by government bodies and perfect for
-              career advancement and job applications.
-            </p>
+      {/* ===== MAIN CONTENT ===== */}
+      <div className="container mx-auto px-4 -mt-10 relative z-20">
+        
+        {/* SECTION 1: GOVT CERTIFICATIONS */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-8">
+             <div className="h-8 w-1 bg-orange-500 rounded-full" />
+             <h2 className="text-2xl font-bold text-[#1a2e44]">Government Recognized Programs</h2>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {certificationCourses.map((course, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 hover:shadow-xl transition-shadow border-t-4 border-blue-500">
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center ${getColorClasses(
-                        course.color
-                      )}`}
-                    >
-                      <course.icon className="w-6 h-6" />
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-500">Duration</p>
-                      <p className="font-semibold">{course.duration}</p>
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {course.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-
-                  <div className="mb-4">
-                    <p className="text-sm text-gray-500 mb-2">
-                      Course Features:
-                    </p>
-                    <ul className="space-y-1">
-                      {course.features.map((feature, featureIndex) => (
-                        <li
-                          key={featureIndex}
-                          className="flex items-center text-sm text-gray-700"
-                        >
-                          <Star className="w-4 h-4 text-yellow-500 mr-2" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <p className="text-sm text-gray-500">Level</p>
-                      <p className="font-semibold">{course.level}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-500">Price</p>
-                      <p className="text-2xl font-bold text-blue-600">
-                        {course.price}
-                      </p>
-                    </div>
-                  </div>
-
-                  <Link href="/join-now">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                      Enroll Now
-                    </Button>
-                  </Link>
-                </Card>
-              </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {govtCertifications.map((course, idx) => (
+              <CourseCard key={idx} course={course} isGovt />
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Professional Courses */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Professional Development Courses
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Advanced courses designed for professionals looking to upskill and
-              stay current with industry trends.
-            </p>
+        {/* SECTION 2: PROFESSIONAL COURSES (From courseDetails) */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-8">
+             <div className="h-8 w-1 bg-blue-600 rounded-full" />
+             <h2 className="text-2xl font-bold text-[#1a2e44]">Industry Specializations</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {professionalCourses.map((course, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={course.image}
-                      alt={course.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center ${getColorClasses(
-                          course.color
-                        )}`}
-                      >
-                        <course.icon className="w-5 h-5" />
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm text-gray-500">Duration</p>
-                        <p className="font-semibold text-sm">
-                          {course.duration}
-                        </p>
-                      </div>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {course.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      {course.description}
-                    </p>
-
-                    <div className="mb-4">
-                      <p className="text-sm text-gray-500 mb-2">Key Topics:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {course.features
-                          .slice(0, 3)
-                          .map((feature, featureIndex) => (
-                            <span
-                              key={featureIndex}
-                              className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        {course.features.length > 3 && (
-                          <span className="text-xs text-gray-500">
-                            +{course.features.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <p className="text-xs text-gray-500">Level</p>
-                        <p className="font-semibold text-sm">{course.level}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-xs text-gray-500">Price</p>
-                        <p className="text-xl font-bold text-blue-600">
-                          {course.price}
-                        </p>
-                      </div>
-                    </div>
-
-                    <Link href="/join-now">
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                        Enroll Now
-                      </Button>
-                    </Link>
-                  </div>
-                </Card>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {courseDetails.map((course) => (
+              <CourseCard key={course.slug} course={course} />
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Why Choose Our Courses */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose Our Courses?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We provide the best learning experience with industry-relevant
-              curriculum and expert instructors.
-            </p>
+      </div>
+
+      {/* ===== WHY CHOOSE US (From first code) ===== */}
+      <section className="py-20 bg-white border-y border-slate-100">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-12 text-center">
+            {[
+              { icon: GraduationCap, title: "Expert Instructors", desc: "Learn from industry veterans", color: "text-orange-500" },
+              { icon: BookOpen, title: "Practical Learning", desc: "Hands-on projects and labs", color: "text-blue-500" },
+              { icon: Award, title: "Global Certification", desc: "Recognized by top organizations", color: "text-purple-500" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <div className={`p-4 rounded-2xl bg-slate-50 mb-4 ${item.color}`}>
+                  <item.icon size={32} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-slate-600">{item.desc}</p>
+              </div>
+            ))}
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Expert Instructors
-              </h3>
-              <p className="text-gray-600">
-                Learn from industry professionals with years of real-world
-                experience.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Practical Learning
-              </h3>
-              <p className="text-gray-600">
-                Hands-on projects and real-world applications to enhance your
-                skills.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Certified Programs
-              </h3>
-              <p className="text-gray-600">
-                Get recognized certificates that boost your career prospects.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold mb-6">
-              Ready to Start Learning?
-            </h2>
-            <p className="text-xl mb-8 opacity-90">
-              Join our community of successful learners and transform your
-              career with our expert-led courses.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/join-now">
-                <Button
-                  size="lg"
-                  className="bg-white text-blue-600 hover:bg-gray-100"
-                >
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  Enroll Now
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-blue-600"
-                >
-                  <Users className="w-5 h-5 mr-2" />
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </main>
+  );
+}
+
+// Reusable Course Card Component with Merged UI
+function CourseCard({ course, isGovt = false }: { course: any; isGovt?: boolean }) {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Card className="group h-full flex flex-col hover:shadow-2xl transition-all duration-300 border-none shadow-md overflow-hidden bg-white">
+        {/* Decorative Top Bar */}
+        <div className={`h-1.5 w-full ${isGovt ? 'bg-orange-500' : 'bg-blue-600'} transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
+        
+        <CardHeader className="pb-4">
+          <div className="flex justify-between items-start mb-4">
+            <div className={`p-3 rounded-2xl transition-colors duration-300 text-3xl 
+              ${isGovt 
+                ? 'bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white' 
+                : 'bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white'
+              }`}>
+              <GraduationCap size={24} />
+            </div>
+            <Badge variant="secondary" className="bg-slate-100 text-[#1a2e44] font-medium py-1 px-3">
+              <Clock size={14} className="mr-1.5 text-orange-500" /> {course.duration}
+            </Badge>
+          </div>
+          
+          <CardTitle className="text-xl font-bold text-[#1a2e44] group-hover:text-orange-600 transition-colors min-h-[56px] flex items-center">
+            {course.title}
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent className="flex-grow">
+          <p className="text-sm text-slate-600 leading-relaxed line-clamp-3">
+            {course.description || `Master industry-standard tools and techniques with our expert-led ${course.title} course.`}
+          </p>
+          
+          {/* Subtle Feature List */}
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center text-xs text-slate-500">
+              <CheckCircle2 size={14} className="mr-2 text-green-500" />
+              Hands-on Projects
+            </div>
+            <div className="flex items-center text-xs text-slate-500">
+              <CheckCircle2 size={14} className="mr-2 text-green-500" />
+              Placement Assistance
+            </div>
+          </div>
+        </CardContent>
+
+        <CardFooter className="pt-4 border-t border-slate-50">
+          <Link href={`/courses/${course.slug}`} className="w-full">
+            <Button className={`w-full transition-all group-hover:gap-3 
+              ${isGovt ? 'bg-[#1a2e44] hover:bg-orange-600' : 'bg-blue-700 hover:bg-[#1a2e44]'}`}>
+              View Details <ArrowRight size={16} className="ml-1" />
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
+    </motion.div>
   );
 }

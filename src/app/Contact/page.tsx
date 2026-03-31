@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import ContactForm from "@/components/ContactForm";
 import {
   MapPin,
@@ -12,315 +12,181 @@ import {
   Users,
   Award,
   BookOpen,
+  ArrowRight,
+  ExternalLink,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function ContactPage() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Visit Us",
-      details: [
-        "Career Mantra Computer Coaching Center",
-        "123 Education Street, Learning District",
-        "City, State - 123456",
-        "India",
-      ],
+      title: "Our Campus",
+      color: "bg-blue-500",
+      details: ["Career Mantra Coaching", "Near Head Post Office", "Civil Lines, Etawah", "UP - 206001"],
     },
     {
       icon: Phone,
-      title: "Call Us",
-      details: [
-        "+91 98765 43210",
-        "+91 87654 32109",
-        "Mon - Sat: 9:00 AM - 7:00 PM",
-      ],
+      title: "Direct Connect",
+      color: "bg-indigo-500",
+      details: ["+91 9149089121", "+91 8279853303", "Mon - Sat: 9AM - 7PM"],
     },
     {
       icon: Mail,
-      title: "Email Us",
-      details: [
-        "info@careermantra.com",
-        "admissions@careermantra.com",
-        "support@careermantra.com",
-      ],
-    },
-    {
-      icon: Clock,
-      title: "Office Hours",
-      details: [
-        "Monday - Friday: 9:00 AM - 7:00 PM",
-        "Saturday: 9:00 AM - 5:00 PM",
-        "Sunday: Closed",
-      ],
-    },
-  ];
-
-  const features = [
-    {
-      icon: MessageSquare,
-      title: "Quick Response",
-      description: "We respond to all inquiries within 24 hours",
-    },
-    {
-      icon: Users,
-      title: "Expert Support",
-      description: "Get help from our experienced team members",
-    },
-    {
-      icon: Award,
-      title: "Free Consultation",
-      description: "Schedule a free course consultation session",
-    },
-    {
-      icon: BookOpen,
-      title: "Course Guidance",
-      description: "Get personalized course recommendations",
+      title: "Email Support",
+      color: "bg-emerald-500",
+      details: ["info@careermantra.com", "careermantrainfo@gmail.com"],
     },
   ];
 
   return (
-    <main className="bg-gray-50 text-gray-800">
-      {/* Hero Section */}
-      <section className="bg-gradient from-blue-50 to-indigo-100 py-20 px-6">
-        <div className="max-w-6xl mx-auto text-center">
+    <main className="bg-[#fcfcfd] min-h-screen">
+      {/* --- HERO SECTION: Minimal & Clean --- */}
+      <section className="relative pt-24 pb-16 px-6 bg-slate-900 overflow-hidden">
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            className="text-left max-w-3xl"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Get in <span className="text-blue-600">Touch</span>
+            <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 mb-6 px-4 py-1">
+              Contact Us
+            </Badge>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+              Let&apos;s build your <span className="text-blue-500">future</span> together.
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Have questions about our courses? Need guidance on choosing the
-              right program? We're here to help you start your learning journey.
+            <p className="text-xl text-slate-400 leading-relaxed">
+              Have a question about a course or need career advice? Our experts are 
+              just a message away. Reach out today for a brighter tomorrow.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Contact Information
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Reach out to us through any of these channels. We're always happy
-              to help!
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <info.icon className="w-8 h-8 text-blue-600" />
+      {/* --- QUICK CONTACT CARDS --- */}
+      <section className="py-12 px-6 -mt-16">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {contactInfo.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              <Card className="border-none shadow-xl shadow-slate-200/50 rounded-[2rem] overflow-hidden hover:scale-[1.02] transition-transform cursor-pointer group">
+                <CardContent className="p-8">
+                  <div className={`w-12 h-12 ${item.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-200`}>
+                    <item.icon className="text-white w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                    {info.title}
-                  </h3>
-                  <div className="space-y-2">
-                    {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-gray-600 text-sm">
-                        {detail}
-                      </p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-4">{item.title}</h3>
+                  <div className="space-y-1">
+                    {item.details.map((line, i) => (
+                      <p key={i} className="text-slate-600 text-sm font-medium">{line}</p>
                     ))}
                   </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- FORM & MAP SPLIT SECTION --- */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-16 items-start">
+            
+            {/* Left: Contact Form Card */}
+            <div className="lg:col-span-7">
+              <div className="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100">
+                <div className="mb-10">
+                  <h2 className="text-3xl font-bold text-slate-900 mb-2">Send us a message</h2>
+                  <p className="text-slate-500">Expect a response within 12 working hours.</p>
+                </div>
+                <ContactForm />
+              </div>
+            </div>
+
+            {/* Right: Map & Support Info */}
+            <div className="lg:col-span-5 space-y-10">
+              {/* Map Preview */}
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                <Card className="relative overflow-hidden rounded-[2.5rem] border-none shadow-lg">
+                   <div className="h-[300px] bg-slate-100 flex flex-col items-center justify-center p-6 text-center">
+                      <div className="bg-white p-4 rounded-full shadow-md mb-4 group-hover:scale-110 transition-transform">
+                        <MapPin className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <h4 className="font-bold text-slate-900">Visit our Campus</h4>
+                      <p className="text-sm text-slate-500 mb-6">Experience our high-tech labs in person.</p>
+                      <Button variant="outline" className="rounded-full border-blue-200 text-blue-600 hover:bg-blue-50">
+                        Get Directions <ExternalLink className="ml-2 w-4 h-4" />
+                      </Button>
+                   </div>
                 </Card>
-              </motion.div>
+              </div>
+
+              {/* Support Highlights */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: MessageSquare, t: "Quick Chat", d: "WhatsApp support" },
+                  { icon: Award, t: "Free Demo", d: "Book a trial class" }
+                ].map((feature, i) => (
+                  <div key={i} className="p-6 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                    <feature.icon className="w-6 h-6 text-blue-500 mb-3" />
+                    <h5 className="font-bold text-slate-900 text-sm">{feature.t}</h5>
+                    <p className="text-xs text-slate-500">{feature.d}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION: Simple & Professional --- */}
+      <section className="py-24 bg-slate-50 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-4">Common Questions</h2>
+            <p className="text-slate-500">Everything you need to know about starting your journey.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              { q: "How do I enroll for NIELIT O Level?", a: "You can visit our center with your documents or call our counselor for direct registration process." },
+              { q: "Are there flexible batch timings?", a: "Yes, we offer early morning (7 AM) to late evening (7 PM) batches including special weekend classes for working professionals." }
+            ].map((faq, i) => (
+              <details key={i} className="group bg-white border border-slate-100 rounded-2xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer shadow-sm">
+                <summary className="flex items-center justify-between gap-4">
+                  <h3 className="font-bold text-slate-900">{faq.q}</h3>
+                  <span className="bg-slate-100 rounded-full p-1 group-open:rotate-180 transition-transform">
+                    <ArrowRight className="w-4 h-4 text-slate-500 rotate-90" />
+                  </span>
+                </summary>
+                <p className="mt-4 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
+                  {faq.a}
+                </p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form and Map */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <ContactForm />
-            </motion.div>
-
-            {/* Map and Additional Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              {/* Map Placeholder */}
-              <Card className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Find Us on Map
-                </h3>
-                <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                    <p className="text-gray-500">Interactive Map</p>
-                    <p className="text-sm text-gray-400">
-                      Career Mantra Computer Coaching Center
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Why Contact Us */}
-              <Card className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Why Contact Us?
-                </h3>
-                <div className="space-y-4">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                        <feature.icon className="w-4 h-4 text-blue-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900">
-                          {feature.title}
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-gray-600">
-              Quick answers to common questions about our courses and services.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  What are the prerequisites for joining?
-                </h3>
-                <p className="text-gray-600">
-                  Most of our courses are designed for beginners. Basic computer
-                  knowledge is helpful but not mandatory. We provide
-                  foundational training for those who need it.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Do you provide certificates?
-                </h3>
-                <p className="text-gray-600">
-                  Yes! We provide completion certificates for all courses. Our
-                  certification courses (CCC, O Level, ADCA) are
-                  government-recognized and highly valued by employers.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  What is the class schedule?
-                </h3>
-                <p className="text-gray-600">
-                  We offer flexible timing options including morning, evening,
-                  and weekend batches. You can choose the schedule that best
-                  fits your availability.
-                </p>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Do you offer placement assistance?
-                </h3>
-                <p className="text-gray-600">
-                  Yes! We provide career guidance, resume building, interview
-                  preparation, and connect our students with potential employers
-                  in the industry.
-                </p>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient from-blue-600 to-indigo-700">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold mb-6">Still Have Questions?</h2>
-            <p className="text-xl mb-8 opacity-90">
-              Don't hesitate to reach out! Our team is here to help you make the
-              best decision for your learning journey.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+919876543210">
-                <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                  <Phone className="w-5 h-5 mr-2 inline" />
-                  Call Now
-                </button>
-              </a>
-              <a href="mailto:vishalkushawahetw@gmail.com">
-                <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-                  <Mail className="w-5 h-5 mr-2 inline" />
-                  Send Email
-                </button>
-              </a>
-            </div>
-          </motion.div>
+      {/* --- FOOTER CTA --- */}
+      <section className="py-12 px-6">
+        <div className="max-w-7xl mx-auto bg-blue-600 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-white relative overflow-hidden">
+           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
+           <div className="text-left relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">Prefer a direct talk?</h2>
+              <p className="text-blue-100">Our senior counselors are available for one-on-one sessions.</p>
+           </div>
+           <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 rounded-full px-10 py-7 text-lg font-bold shadow-xl">
+             Call Admissions <Phone className="ml-2 w-5 h-5" />
+           </Button>
         </div>
       </section>
     </main>
