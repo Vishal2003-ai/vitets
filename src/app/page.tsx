@@ -17,26 +17,83 @@ import {
   Database,
   PenTool,
   TrendingUp,
-  MessageCircle
+  MessageCircle,
+  Code,
+  ArrowUpRight
 } from "lucide-react"
 
+
+const stats = [
+  { title: "10+", desc: "Years Experience", icon: Award },
+  { title: "5000+", desc: "Students Trained", icon: Users },
+  { title: "15+", desc: "Professional Courses", icon: GraduationCap },
+  { title: "100%", desc: "Career Support", icon: Briefcase },
+]
+
+const courses = [
+  {
+    name: "O Level",
+    slug: "o-level",
+    icon: Monitor,
+    color: "text-blue-600",
+    bgColor: "bg-blue-50",
+    description: "NIELIT recognized foundation course in IT tools and systems.",
+    duration: "1 Year",
+    category: "Government"
+  },
+  {
+    name: "CCC",
+    slug: "ccc",
+    icon: CheckCircle2,
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+    description: "Course on Computer Concepts - essential for govt job preparation.",
+    duration: "80 Hours",
+    category: "Essential"
+  },
+  {
+    name: "ADCA / DCA",
+    slug: "adca-dca",
+    icon: Database,
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
+    description: "Advanced Diploma covering Office, Tally, and Graphics.",
+    duration: "12 Months",
+    category: "Diploma"
+  },
+  {
+    name: "Web Development",
+    slug: "web-development",
+    icon: Code,
+    color: "text-indigo-600",
+    bgColor: "bg-indigo-50",
+    description: "Build modern websites using HTML, CSS, JS, and Next.js.",
+    duration: "6 Months",
+    category: "Trending"
+  },
+  {
+    name: "Graphic Designing",
+    slug: "graphic-designing",
+    icon: PenTool,
+    color: "text-pink-600",
+    bgColor: "bg-pink-50",
+    description: "Master Photoshop, CorelDraw, and Illustrator for creative roles.",
+    duration: "4 Months",
+    category: "Creative"
+  },
+  {
+    name: "Tally Prime + GST",
+    slug: "tally-prime-gst",
+    icon: TrendingUp,
+    color: "text-orange-600",
+    bgColor: "bg-orange-50",
+    description: "Professional accounting with inventory and taxation mastery.",
+    duration: "3 Months",
+    category: "Finance"
+  }
+]
+
 export default function Home() {
-  const stats = [
-    { title: "10+", desc: "Years Experience", icon: Award },
-    { title: "5000+", desc: "Students Trained", icon: Users },
-    { title: "15+", desc: "Professional Courses", icon: GraduationCap },
-    { title: "100%", desc: "Career Support", icon: Briefcase },
-  ]
-
-  const courses = [
-    { name: "O Level", icon: Monitor, color: "text-blue-600" },
-    { name: "CCC", icon: CheckCircle2, color: "text-green-600" },
-    { name: "DCA / ADCA", icon: Database, color: "text-purple-600" },
-    { name: "Web Development", icon: Monitor, color: "text-indigo-600" },
-    { name: "Graphic Designing", icon: PenTool, color: "text-pink-600" },
-    { name: "Tally + GST", icon: TrendingUp, color: "text-orange-600" },
-  ]
-
   return (
     <main className="w-full overflow-hidden">
       
@@ -126,28 +183,52 @@ export default function Home() {
             <p className="text-slate-600 text-lg">Choose from our industry-leading courses designed to make you a professional expert.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {courses.map((course, index) => (
-              <Card key={index} className="group border-none shadow-md hover:shadow-2xl transition-all duration-300 rounded-3xl overflow-hidden bg-white">
-                <CardHeader className="pb-2">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-slate-50 transition-colors group-hover:bg-indigo-600 group-hover:text-white ${course.color}`}>
-                    <course.icon className="w-6 h-6 transition-colors" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold group-hover:text-indigo-600 transition-colors">
-                    {course.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-slate-500 text-base mb-6">
-                    Practical, project-based training with official certification valid everywhere.
-                  </CardDescription>
-                  <Button variant="ghost" className="p-0 text-indigo-600 font-bold flex items-center gap-2 hover:bg-transparent hover:gap-3 transition-all">
-                    Course Syllabus <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {courses.map((course, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      <Card className="group relative overflow-hidden border-none bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-2xl transition-all duration-500 rounded-[2rem]">
+        <CardContent className="p-8">
+          {/* Top Row: Icon & Category */}
+          <div className="flex justify-between items-start mb-6">
+            <div className={`p-4 rounded-2xl ${course.bgColor} ${course.color} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+              <course.icon className="w-7 h-7" />
+            </div>
+            <Badge variant="secondary" className="bg-slate-100 text-slate-600 border-none font-bold text-[10px] uppercase tracking-wider">
+              {course.category}
+            </Badge>
           </div>
+
+          {/* Content */}
+          <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+            {course.name}
+          </h3>
+          <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">
+            {course.description}
+          </p>
+
+          {/* Footer Info */}
+          <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+              {course.duration}
+            </span>
+            <Link href={`/courses/${course.slug}`} className="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+        
+            <div className="flex items-center gap-1 text-sm font-bold text-indigo-600 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all">
+              Join Now <ArrowUpRight className="w-4 h-4" />
+            </div>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  ))}
+</div>
         </div>
       </section>
 
@@ -184,3 +265,5 @@ export default function Home() {
     </main>
   )
 }
+
+ 
